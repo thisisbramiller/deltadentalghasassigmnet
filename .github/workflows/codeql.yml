@@ -53,4 +53,7 @@ jobs:
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
         with:
-          languages: ${{ matrix.language }}
+          # matrix is imlicitly available to all steps in the job
+          # it is included explicitly here for demonstration purposes
+          # per interviewer's request
+          matrix: ${{ toJson(matrix) }}
