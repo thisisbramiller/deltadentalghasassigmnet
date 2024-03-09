@@ -5,3 +5,14 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
+jobs:
+  scan:
+    name: Analyze code with CodeQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      # normally contents and actions permissions are required for private repositories, however, it commented out for demonstration purposes on a public repositories
+      # contents: read
+      # actions: write
+      security-events: write
