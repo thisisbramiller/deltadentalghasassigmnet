@@ -49,3 +49,8 @@ jobs:
       - if: matrix.language == 'java-kotlin'
         name: Build project
         run: ./mvnw package
+
+      - name: Analyze with CodeQL
+        uses: github/codeql-action/analyze@v3
+        with:
+          languages: ${{ matrix.language }}
