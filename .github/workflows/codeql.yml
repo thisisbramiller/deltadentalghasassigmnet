@@ -39,4 +39,4 @@ jobs:
 
       - if: matrix.language == 'java-kotlin'
         name: Build project
-        run: ./mvnw build
+        run: ./mvnw package
