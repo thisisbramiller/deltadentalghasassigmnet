@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DeltadentalghasassigmnetApplication {
+public class DeltaDentalGhasRestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DeltadentalghasassigmnetApplication.class, args);
+		SpringApplication.run(DeltaDentalGhasRestApplication.class, args);
 	}
 
 }
