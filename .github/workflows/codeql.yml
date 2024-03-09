@@ -1,0 +1,59 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan:
+    name: Analyze code with CodeQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      # normally contents and actions permissions are required for private repositories, however, it commented out for demonstration purposes on a public repositories
+      # contents: read
+      # actions: write
+      security-events: write
+
+    strategy:
+      # fail-fast is true by default, but it's included here for demonstration purposes and request for explicit notation from the interviewer
+      fail-fast: true
+      matrix:
+        language: [ 'java-kotlin', 'javascript-typescript' ]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+        
+      # Here I have an opprotunity to use the autobuild functionality provided by GitHub
+      # and build the project based on the language provided in the matrix. However, in 
+      # respects to the request to use explicit notation, I will not include the autobuild
+      # step and opt to build manually in the next step. This would also allow us to have
+      # more control over the build process.
+
+      - if: matrix.language == 'java-kotlin'
+        name: Setup JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - if: matrix.language == 'java-kotlin'
+        name: Build project
+        run: ./mvnw package
+
+      - name: Analyze with CodeQL
+        uses: github/codeql-action/analyze@v3
+        with:
+          # matrix is imlicitly available to all steps in the job
+          # it is included explicitly here for demonstration purposes
+          # per interviewer's request
+          matrix: ${{ toJson(matrix) }}
