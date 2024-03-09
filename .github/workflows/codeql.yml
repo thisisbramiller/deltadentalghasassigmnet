@@ -30,5 +30,13 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
+        
+      # Here I have an opprotunity to use the autobuild functionality provided by GitHub
+      # and build the project based on the language provided in the matrix. However, in 
+      # respects to the request to use explicit notation, I will not include the autobuild
+      # step and opt to build manually in the next step. This would also allow us to have
+      # more control over the build process.
 
-
+      - if: matrix.language == 'java-kotlin'
+        name: Build project
+        run: ./mvnw build
