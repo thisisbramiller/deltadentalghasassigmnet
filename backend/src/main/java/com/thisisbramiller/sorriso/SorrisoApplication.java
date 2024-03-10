@@ -1,13 +1,13 @@
-package com.thisisbramiller.deltadentalghasassigmnet;
+package com.thisisbramiller.sorriso;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DeltaDentalGhasRestApplication {
+public class SorrisoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DeltaDentalGhasRestApplication.class, args);
+		SpringApplication.run(SorrisoApplication.class, args);
 	}
 
 }

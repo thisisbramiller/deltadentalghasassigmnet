@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.thisisbramiller</groupId>
-	<artifactId>deltadentalghasassigmnet</artifactId>
+	<artifactId>sorriso</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>deltadentalghasassigmnet</name>
+	<name>sorriso</name>
 	<description>Demo project for Delta Dental GHAS Interview</description>
 	<properties>
 		<java.version>17</java.version>

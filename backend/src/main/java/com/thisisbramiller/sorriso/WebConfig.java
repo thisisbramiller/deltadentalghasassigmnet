@@ -1,4 +1,4 @@
-package com.thisisbramiller.deltadentalghasassigmnet;
+package com.thisisbramiller.sorriso;
 
 import org.springframework.context.annotation.Configuration;
 
