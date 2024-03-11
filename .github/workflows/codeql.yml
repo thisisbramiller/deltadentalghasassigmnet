@@ -60,7 +60,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         id: get-changed-paths
         run: |
-            git diff --name-only ${{ github.event_before }} ${{ github.after }} > ./.github/scripts/diff.txt
+            git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > ./.github/scripts/diff.txt
             echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
 
       - name: Set matrix values
