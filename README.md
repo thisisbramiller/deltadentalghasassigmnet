@@ -1,4 +1,4 @@
-# CodeQL
+# CodeQL, Dependabot, and Local Env Demo
 
 This GitHub Actions workflow is designed to analyze code using CodeQL. It scans for changed files supported by CodeQL and only analyzes projects that have changed on pull requests. During a push to the main branch, it scans everything.
 
@@ -29,6 +29,10 @@ This job analyzes the code using CodeQL. It runs on the `main` branch and is dep
 
 **Note:** Ensure you have the necessary configurations and permissions set up for CodeQL analysis.
 
+## Dependabot
+
+Dependabot is enabled in this repository to automatically keep dependencies up to date. It checks for updates to dependencies defined in your project's configuration files and opens pull requests to update them.
+
 ## Running CodeQL from Visual Studio Code
 
 To run CodeQL from your local environment using Visual Studio Code, follow these steps:
@@ -45,7 +49,6 @@ To run CodeQL from your local environment using Visual Studio Code, follow these
 
 ### Visual Studio Code Screenshot
 ![Visual Studio Code Screenshot](https://github.com/thisisbramiller/deltadentalghasassigmnet/assets/76793954/68a81b22-a04e-4824-81b4-1912ec00d676)
-
 
 For local secrets scanning, you can use Husky with pre-commit hooks. However, if you've opted for Push Protection within the repository settings, it will enforce checks before pushing changes to the main branch, ensuring that no secrets are inadvertently committed. Note that while this approach may not completely eliminate the possibility of committing secrets, it significantly reduces the risk compared to relying solely on pre-commit hooks.
 
