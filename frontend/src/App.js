@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Policy Holder Management</h1>
-      </header>
+      </header> 
       <PolicyHolderCrud load={load} policyHolders={policyHolders} />
     </div>
   );     
