@@ -80,9 +80,9 @@ for line in glob.glob('**', recursive=True):
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "java"}).items()))
     if find_in_list(languages["javascript"], line) and (os.path.isdir(path)):
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
-    if find_in_list(languages["javascript_html"], line) and (os.path.isdir(path)):
-        if check_html_for_js(path):
-            outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
+    #if find_in_list(languages["javascript_html"], line) and (os.path.isdir(path)):
+    #    if check_html_for_js(path):
+    #        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
     if find_in_list(languages["python_lang"], line) and (os.path.isdir(path)):
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "python"}).items()))
     if find_in_list(languages["ruby"], line) and (os.path.isdir(path)):
