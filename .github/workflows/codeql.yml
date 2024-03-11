@@ -31,6 +31,13 @@ jobs:
         run: |
           echo "::set-output name=all-paths::$(./.github/scripts/list-all-paths)"
 
+      - name: Get changed paths
+        if: ${{ github.event_name != 'pull_request' }}
+        id: get-changed-paths
+        run: |
+          git diff --name-only origin/$GITHUB_BASE_REF $GITHUB_SHA > ./.github/scripts/diff.txt
+          echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
+
   scan:
     name: Analyze code with CodeQL
     runs-on: ubuntu-latest
