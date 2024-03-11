@@ -14,7 +14,7 @@ function App() {
   async function load() {
     const resp = await api.get("/all");
     setPolicyHolders(resp.data);
-    
+     
   }
  
   return (  

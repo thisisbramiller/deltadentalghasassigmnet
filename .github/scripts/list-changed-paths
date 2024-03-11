@@ -5,15 +5,17 @@ import os
 from html.parser import HTMLParser
 from genericpath import isdir
 
-c_and_cplus = [".cpp", ".c++", ".cxx", ".hpp", ".hh", ".h++", ".hxx", ".c," ".cc", ".h"]
-csharp = [".sln", ".csproj", ".cs", ".cshtml", ".xaml"]
-golang = [".go"]
-java = [".java"]
-javascript = [".js", ".jsx", ".mjs", ".es", ".es6", ".vue", ".hbs", ".ejs", ".njk", ".json", ".raml"]
-javascript_html = [".htm", ".html", ".xhtm", ".xhtml", ".xml"]
-python_lang = [".py"]
-ruby = [".rb", ".erb", ".gemspec", "Gemfile"]
-typescript = [".ts", ".tsx", ".mts", ".cts"]
+languages = {
+    "c_and_cplus": [".cpp", ".c++", ".cxx", ".hpp", ".hh", ".h++", ".hxx", ".c," ".cc", ".h"],
+    "csharp": [".sln", ".csproj", ".cs", ".cshtml", ".xaml"],
+    "golang": [".go"],
+    "java": [".java"],
+    "javascript": [".js", ".jsx", ".mjs", ".es", ".es6", ".vue", ".hbs", ".ejs", ".njk", ".json", ".raml"],
+    "javascript_html": [".htm", ".html", ".xhtm", ".xhtml", ".xml"],
+    "python_lang": [".py"],
+    "ruby": [".rb", ".erb", ".gemspec", "Gemfile"],
+    "typescript": [".ts", ".tsx", ".mts", ".cts"],
+}
 
 lines = list(open("./.github/scripts/diff.txt").readlines())
 outlines = dict()
@@ -58,30 +60,17 @@ def check_html_for_js(file):
         if parser.NEWTAGS[i] == "script":
             for j in range(len(parser.NEWATTRS[i])):
                 if parser.NEWATTRS[i][j][0] == "type":
-                    if find_in_list(javascript, parser.NEWATTRS[i][j][1]):
+                    if find_in_list(languages["javascript"], parser.NEWATTRS[i][j][1]):
                         return True
     return False
 
 for line in lines:
     path = line.split('/')[0]
-    if find_in_list(c_and_cplus, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "cpp"}).items()))
-    if find_in_list(csharp, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "csharp"}).items()))
-    if find_in_list(golang, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "go"}).items()))
-    if find_in_list(java, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "java"}).items()))
-    if find_in_list(javascript, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
-    if find_in_list(javascript_html, line) and (os.path.isdir(path)):
-        if (check_html_for_js(line)):
-            outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
-    if find_in_list(python_lang, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "python"}).items()))
-    if find_in_list(ruby, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "ruby"}).items()))
-    if find_in_list(typescript, line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
-    
+    for lang, extensions in languages.items():
+        if find_in_list(extensions, line) and os.path.isdir(path):
+            if lang == "javascript_html" and check_html_for_js(path):
+                outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
+            else:
+                outlines["include"].add(tuple(dict({"target-dir": path, "languages": lang}).items()))
+
 print(json.dumps(outlines, default=serialize_sets))
