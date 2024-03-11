@@ -17,7 +17,7 @@ jobs:
     name: Find paths with changes
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix-values.outputs.matrix }} 
+      matrix: ${{ steps.set-matrix-values.outputs.result }} 
 
     steps:
       - name: Checkout repository
@@ -25,31 +25,6 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
-
       - name: Get all paths
         if: ${{ github.event_name != 'pull_request' }}
         id: get-all-paths
@@ -71,7 +46,7 @@ jobs:
           ALL_PATHS: ${{ steps.get-all-paths.outputs.all-paths }}
           CHANGED_PATHS: ${{ steps.get-changed-paths.outputs.changed-paths }}
         run: |
-          echo "{matrix}={$ALL_PATHS$CHANGED_PATHS}" >> $GITHUB_OUTPUT
+          echo "result=$ALL_PATHS$CHANGED_PATHS" >> $GITHUB_OUTPUT
           echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
 
   scan:
