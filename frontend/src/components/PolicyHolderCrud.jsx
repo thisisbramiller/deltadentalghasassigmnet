@@ -8,7 +8,7 @@ const PolicyHolderCrud = ({ load, policyHolders }) => {
     const [email, setEmail] = useState("");
     const [policyNumber, setPolicyNumber] = useState("");
 
-    async function save(event) {
+    async function savePolicyHolder(event) {
         event.preventDefault();
 
         await api.post("/create", {
