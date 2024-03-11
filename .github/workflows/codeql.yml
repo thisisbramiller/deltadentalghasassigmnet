@@ -13,23 +13,23 @@ on:
       - '*'
 
 jobs:
-  - find-paths-with-changes:
-      name: Find paths with changes
-      runs-on: ubuntu-latest
-      outputs:
-        matrix: ${{ steps.set-matrix-values.outputs.matrix }}
+  find-paths-with-changes:
+    name: Find paths with changes
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix-values.outputs.matrix }}
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-        - name: Get all paths
-          if: ${{ github.event_name == 'pull_request' }}
-          id: get-all-paths
-          run: |
-            echo "::set-output name=all-paths::$(./.github/scripts/list-all-paths)"
+      - name: Get all paths
+        if: ${{ github.event_name == 'pull_request' }}
+        id: get-all-paths
+        run: |
+          echo "::set-output name=all-paths::$(./.github/scripts/list-all-paths)"
 
   scan:
     name: Analyze code with CodeQL
