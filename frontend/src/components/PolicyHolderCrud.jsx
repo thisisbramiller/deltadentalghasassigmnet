@@ -39,4 +39,20 @@ const PolicyHolderCrud = ({ load, policyHolders }) => {
         alert("Policy Holder deleted successfully!");
         load();
     }
+
+    async function updatePolicyHolder(event) {
+        event.preventDefault();
+
+        if (!id) return alert("Please select a policy holder to update!");
+
+        await api.put("/update", { id: id, name: name, email: email, policyNumber: policyNumber });
+
+        alert("Policy Holder updated successfully!");
+
+        setId("");
+        setName("");
+        setEmail("");
+        setPolicyNumber("");
+        load();
+    }
 }
