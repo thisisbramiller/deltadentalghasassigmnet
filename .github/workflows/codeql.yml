@@ -77,9 +77,22 @@ jobs:
           config-file: codeql-config.yml
           languages: ${{ matrix.languages }}
 
-      - name: Attempting build
-        if: ${{ (matrix.languages == 'cpp' || matrix.languages == 'csharp' || matrix.languages == 'java') }}
+      - name: Attempting Autobuild
+        if: ${{ (matrix.languages == 'cpp' || matrix.languages == 'csharp') }}
         uses: github/codeql-action/autobuild@v3
+
+      - name: Manual Build
+        if: matrix.languages == 'java'
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          server-id: github
+          settings-path: ${{ github.workspace}}
+
+      - if: matrix.language == 'java'
+        name: Build project
+        run: mvn package -f ${{matrix.languages}}/pom.xml
 
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
