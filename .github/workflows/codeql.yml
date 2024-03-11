@@ -59,8 +59,6 @@ jobs:
       - name: Get changed paths
         if: ${{ github.event_name == 'pull_request' }}
         id: get-changed-paths
-        env: 
-          PYTHONUNBUFFERED: "1"
         run: |
             git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > ./.github/scripts/diff.txt
             echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
@@ -70,15 +68,15 @@ jobs:
         env:
           ALL_PATHS: ${{ steps.get-all-paths.outputs.all-paths }}
           CHANGED_PATHS: ${{ steps.get-changed-paths.outputs.changed-paths }}
-        run: |
-          echo "{matrix}={$ALL_PATHS$CHANGED_PATHS}" >> $GITHUB_OUTPUT
-          echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
+        run: echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
 
   scan:
     name: "Analyze ${{matrix.languages}} with CodeQL: ${{matrix.target-dir}}"
     needs: find-paths-with-changes
     runs-on: ubuntu-latest
     timeout-minutes: 360
+    env:
+      MATRIX: ${{needs.set-matrix-values.outputs.matrix}}
     permissions:
       # normally contents and actions permissions are required for private repositories, however, it commented out for demonstration purposes on a public repositories
       # contents: read
@@ -88,7 +86,7 @@ jobs:
     strategy:
       # fail-fast is true by default, but it's included here for demonstration purposes and request for explicit notation from the interviewer
       fail-fast: true
-      matrix: ${{ fromJson(needs.set-matrix-values.outputs.matrix) }}
+      matrix: ${{ fromJson(env.MATRIX) }}
     
     steps:
       - name: Checkout repository
