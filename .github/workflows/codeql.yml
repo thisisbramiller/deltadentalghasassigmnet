@@ -38,6 +38,15 @@ jobs:
           git diff --name-only origin/$GITHUB_BASE_REF $GITHUB_SHA > ./.github/scripts/diff.txt
           echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
 
+      - name: Set matrix values
+        id: set-matrix-values
+        env:
+          ALL_PATHS: ${{ steps.get-all-paths.outputs.all-paths }}
+          CHANGED_PATHS: ${{ steps.get-changed-paths.outputs.changed-paths }}
+        run: |
+          echo "::set-output name=matrix::$ALL_PATHS$CHANGED_PATHS"
+          echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
+
   scan:
     name: Analyze code with CodeQL
     runs-on: ubuntu-latest
