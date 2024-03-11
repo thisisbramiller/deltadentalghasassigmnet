@@ -62,7 +62,15 @@ jobs:
       
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Generate CodeQL config file
+        env:
+          TARGET_DIR: ${{ matrix.target-dir }}
+        run: |
+          cp .github/codeql-config-template.yml codeql-config.yml
+          sed -i 's|TARGET_DIR|'${TARGET_DIR}'|g' codeql-config.yml
+          
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
