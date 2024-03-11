@@ -92,7 +92,7 @@ jobs:
 
       - if: matrix.languages == 'java-kotlin'
         name: Build project
-        run: mvn package -f ${{matrix.languages}}/pom.xml
+        run: mvn package -f ${{matrix.target-dir}}/pom.xml
 
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
