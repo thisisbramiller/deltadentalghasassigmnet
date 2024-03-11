@@ -41,7 +41,7 @@ public class PolicyHolderController {
         return policyHolderRepository.findById(id);
     }
 
-    @PutMapping("update/")
+    @PutMapping("/update")
     public PolicyHolder update(@RequestBody PolicyHolder policyHolder) {
         return policyHolderRepository.save(policyHolder);
     }
