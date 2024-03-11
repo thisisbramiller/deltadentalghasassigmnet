@@ -17,7 +17,7 @@ jobs:
     name: Find paths with changes
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix-values.outputs.result }} 
+      matrix: ${{steps.set-matrix-values.outputs.matrix}} 
 
     steps:
       - name: Checkout repository
@@ -46,38 +46,27 @@ jobs:
           ALL_PATHS: ${{ steps.get-all-paths.outputs.all-paths }}
           CHANGED_PATHS: ${{ steps.get-changed-paths.outputs.changed-paths }}
         run: |
-          echo "result=$ALL_PATHS$CHANGED_PATHS" >> $GITHUB_OUTPUT
+          echo "::set-output name=matrix::$ALL_PATHS$CHANGED_PATHS"
           echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
 
   scan:
     name: "Analyze ${{matrix.languages}} with CodeQL: ${{matrix.target-dir}}"
     needs: find-paths-with-changes
     runs-on: ubuntu-latest
-    timeout-minutes: 360
-    permissions:
-      # normally contents and actions permissions are required for private repositories, however, it commented out for demonstration purposes on a public repositories
-      # contents: read
-      # actions: write
-      security-events: write
-
     strategy:
-      # fail-fast is true by default, but it's included here for demonstration purposes and request for explicit notation from the interviewer
       fail-fast: true
       matrix: ${{ fromJson(needs.find-paths-with-changes.outputs.matrix) }}
-    
+    timeout-minutes: 360
+    permissions:
+      security-events: write
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: ${{ matrix.language }}
-        
-      # Here I have an opprotunity to use the autobuild functionality provided by GitHub
-      # and build the project based on the language provided in the matrix. However, in 
-      # respects to the request to use explicit notation, I will not include the autobuild
-      # step and opt to build manually in the next step. This would also allow us to have
-      # more control over the build process.
+          languages: ${{ matrix.languages }}
 
       - if: matrix.language == 'java-kotlin'
         name: Setup JDK 17
@@ -95,7 +84,4 @@ jobs:
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
         with:
-          # matrix is imlicitly available to all steps in the job
-          # it is included explicitly here for demonstration purposes
-          # per interviewer's request
           matrix: ${{ toJson(matrix) }}
