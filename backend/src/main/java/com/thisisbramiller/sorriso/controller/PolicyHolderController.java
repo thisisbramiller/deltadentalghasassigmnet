@@ -52,5 +52,5 @@ public class PolicyHolderController {
     public void deleteById(@PathVariable String id) {
         policyHolderRepository.deleteById(id);
     }
- 
+  
 }
