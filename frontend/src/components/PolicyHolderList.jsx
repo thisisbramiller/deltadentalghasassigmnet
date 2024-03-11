@@ -1,5 +1,14 @@
 import React from "react";
 
+/**
+ * Renders a list of policy holders.
+ *
+ * @component
+ * @param {Object[]} policyHolders - An array of policy holders.
+ * @param {Function} editPolicyHolder - A function to edit a policy holder.
+ * @param {Function} deletePolicyHolder - A function to delete a policy holder.
+ * @returns {JSX.Element} The rendered PolicyHolderList component.
+ */
 const PolicyHolderList = ({ policyHolders, editPolicyHolder, deletePolicyHolder }) => {
     return (
         <div>

@@ -1,3 +1,12 @@
+/**
+ * 
+ * This CSS file contains styles for the index page of the Delta Dental application.
+ * 
+ * Styles:
+ * - The body element has a margin of 0 and uses a font stack that prioritizes system fonts.
+ * - The code element uses a monospace font stack for displaying code snippets.
+ * - The font smoothing properties are used to improve the readability of text on different platforms.
+ */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

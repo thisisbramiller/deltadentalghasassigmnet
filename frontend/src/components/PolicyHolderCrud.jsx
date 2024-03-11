@@ -2,6 +2,14 @@ import { useState } from 'react';
 import api from '../api/axiosConfig';
 import PolicyHolderList from './PolicyHolderList';
 
+/**
+ * Renders a form for creating, updating, and deleting policy holders.
+ *
+ * @component
+ * @param {Function} load - A function to load the policy holders.
+ * @param {Array} policyHolders - An array of policy holders.
+ * @returns {JSX.Element} The PolicyHolderCrud component.
+ */
 const PolicyHolderCrud = ({ load, policyHolders }) => {
     const [id, setId] = useState("");
     const [name, setName] = useState("");
