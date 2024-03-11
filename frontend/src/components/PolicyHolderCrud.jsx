@@ -55,4 +55,18 @@ const PolicyHolderCrud = ({ load, policyHolders }) => {
         setPolicyNumber("");
         load();
     }
+
+    return (
+        <div>
+            <form onSubmit={id ? updatePolicyHolder : savePolicyHolder}>
+                <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+                <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                <input type="text" placeholder="Policy Number" value={policyNumber} onChange={e => setPolicyNumber(e.target.value)} />
+                <input type="text" hidden value={id} onChange={e => setId(e.target.value)} />
+                <button type="submit">{id ? "Update" : "Save"}</button>
+            </form>
+            
+            <PolicyHolderList policyHolders={policyHolders} editPolicyHolder={editPolicyHolder} deletePolicyHolder={deletePolicyHolder} />
+        </div>
+    );
 }
