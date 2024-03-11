@@ -73,7 +73,8 @@ jobs:
           echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
 
   scan:
-    name: Analyze code with CodeQL
+    name: "Analyze ${{matrix.languages}} with CodeQL: ${{matrix.target-dir}}"
+    needs: find-paths-with-changes
     runs-on: ubuntu-latest
     timeout-minutes: 360
     permissions:
