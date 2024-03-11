@@ -1,10 +1,10 @@
-package com.thisisbramiller.deltadentalghasassigmnet;
+package com.thisisbramiller.sorriso;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeltaDentalGhasRestApplicationTests {
+class SorrisoApplicationTests {
 
 	@Test
 	void contextLoads() {
