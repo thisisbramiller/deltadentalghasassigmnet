@@ -73,17 +73,17 @@ for line in glob.glob('**', recursive=True):
     if find_in_list(languages["golang"], line) and (os.path.isdir(path)): 
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "golang"}).items()))
     if find_in_list(languages["java"], line) and (os.path.isdir(path)): 
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "java"}).items()))
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "java-kotlin"}).items()))
     if find_in_list(languages["javascript"], line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
     #if find_in_list(languages["javascript_html"], line) and (os.path.isdir(path)):
     #    if check_html_for_js(path):
-    #        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript"}).items()))
+    #        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
     if find_in_list(languages["python_lang"], line) and (os.path.isdir(path)):
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "python"}).items()))
     if find_in_list(languages["ruby"], line) and (os.path.isdir(path)):
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "ruby"}).items()))
     if find_in_list(languages["typescript"], line) and (os.path.isdir(path)):
-        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "typescript"}).items()))
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
 
 print(json.dumps(outlines, default=serialize_sets))
