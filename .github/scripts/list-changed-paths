@@ -52,25 +52,10 @@ def find_in_list(list, string):
             return True
     return False
 
-def check_html_for_js(file):
-    parser = myhtmlparser()
-    buf = open(file, "r").read()
-    parser.feed(buf)
-    for i in range(len(parser.NEWTAGS)):
-        if parser.NEWTAGS[i] == "script":
-            for j in range(len(parser.NEWATTRS[i])):
-                if parser.NEWATTRS[i][j][0] == "type":
-                    if find_in_list(languages["javascript"], parser.NEWATTRS[i][j][1]):
-                        return True
-    return False
-
 for line in lines:
     path = line.split('/')[0]
     for lang, extensions in languages.items():
         if find_in_list(extensions, line) and os.path.isdir(path):
-            if lang == "javascript_html" and check_html_for_js(path):
-                outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
-            else:
-                outlines["include"].add(tuple(dict({"target-dir": path, "languages": lang}).items()))
+            outlines["include"].add(tuple(dict({"target-dir": path, "languages": lang}).items()))
 
 print(json.dumps(outlines, default=serialize_sets))
