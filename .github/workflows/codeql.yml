@@ -35,8 +35,8 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         id: get-changed-paths
         run: |
-          git diff --name-only origin/$GITHUB_BASE_REF $GITHUB_SHA > ./.github/scripts/diff.txt
-          echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
+            git diff-tree --no-commit-id --name-only -r ${{ github.base_ref }} ${{ github.sha }} > ./.github/scripts/diff.txt
+            echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
 
       - name: Set matrix values
         id: set-matrix-values
