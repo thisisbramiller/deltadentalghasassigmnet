@@ -1,1 +1,1 @@
-web: java  -cp target/classes:target/dependency/* com.thisisbramiller.sorriso.SorrisoApplication --port $PORT
+web: java  -cp target/classes:target/dependency/* com.thisisbramiller.sorriso.SorrisoApplication --server.port $PORT
