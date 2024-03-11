@@ -63,7 +63,7 @@ jobs:
     strategy:
       # fail-fast is true by default, but it's included here for demonstration purposes and request for explicit notation from the interviewer
       fail-fast: true
-      matrix: ${{ needs.find-paths-with-changes.outputs.matrix }}
+      matrix: ${{ fromJson(needs.find-paths-with-changes.outputs.matrix) }}
     
     steps:
       - name: Checkout repository
