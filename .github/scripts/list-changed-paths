@@ -19,8 +19,7 @@ languages = {
 
 lines = []
 with open(".github/scripts/diff.txt") as f:
-    lines = [lines.rstrip() for line in f]
-print(lines)
+    lines = [line for line in f]
 outlines = dict()
 outlines["include"] = set()
 
