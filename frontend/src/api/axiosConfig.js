@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: 'http://localhost:8000/api/v1/policyholder'
+    baseURL: 'https://sorriso-frontend-staging-8afef3999af7.herokuapp.com'
 });
