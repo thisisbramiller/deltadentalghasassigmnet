@@ -65,8 +65,10 @@ const PolicyHolderCrud = ({ load, policyHolders }) => {
                 <input type="text" hidden value={id} onChange={e => setId(e.target.value)} />
                 <button type="submit">{id ? "Update" : "Save"}</button>
             </form>
-            
+
             <PolicyHolderList policyHolders={policyHolders} editPolicyHolder={editPolicyHolder} deletePolicyHolder={deletePolicyHolder} />
         </div>
     );
-}
+};
+
+export default PolicyHolderCrud;
