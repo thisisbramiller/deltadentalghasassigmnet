@@ -66,28 +66,26 @@ def check_html_for_js(html: str) -> bool:
                         return True
     return False
 
-outlines = []
-
 for line in lines:
     path = line.split('/')[0]
     if find_in_list(c_and_cplus, line) and (os.path.isdir(path)):
-        outlines.append({"target-dir": path, "languages": "cpp"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "cpp"}).items()))
     if find_in_list(csharp, line) and (os.path.isdir(path)):
-        outlines.append({"target-dir": path, "languages": "csharp"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "csharp"}).items()))
     if find_in_list(golang, line) and (os.path.isdir(path)): 
-        outlines.append({"target-dir": path, "languages": "golang"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "golang"}).items()))
     if find_in_list(java, line) and (os.path.isdir(path)): 
-        outlines.append({"target-dir": path, "languages": "java-kotlin"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "java-kotlin"}).items()))
     if find_in_list(javascript, line) and (os.path.isdir(path)):
-        outlines.append({"target-dir": path, "languages": "javascript-typescript"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
     if find_in_list(javascript_html, line) and (os.path.isdir(path)):
         if check_html_for_js(path):
-            outlines.append({"target-dir": path, "languages": "javascript-typescript"})
+            outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
     if find_in_list(python_lang, line) and (os.path.isdir(path)):
-        outlines.append({"target-dir": path, "languages": "python"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "python"}).items()))
     if find_in_list(ruby, line) and (os.path.isdir(path)):
-        outlines.append({"target-dir": path, "languages": "ruby"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "ruby"}).items()))
     if find_in_list(typescript, line) and (os.path.isdir(path)):
-        outlines.append({"target-dir": path, "languages": "javascript-typescript"})
+        outlines["include"].add(tuple(dict({"target-dir": path, "languages": "javascript-typescript"}).items()))
 
 print(json.dumps(outlines, default=serialize_sets))

@@ -53,5 +53,5 @@ public class PolicyHolderController {
         policyHolderRepository.deleteById(id);
     }
 
-    
+
 }
