@@ -21,21 +21,21 @@ outlines["include"] = set()
 
 class htmlparser(HTMLParser):
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
         self.reset()
         self.NEWTAGS = []
         self.NEWATTRS = []
         self.HTMLDATA = []
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+    def handle_starttag(self, tag, attrs):
         self.NEWTAGS.append(tag)
         self.NEWATTRS.append(attrs)
 
-    def handle_data(self, data: str) -> None:
+    def handle_data(self, data):
         self.HTMLDATA.append(data)
 
-    def clean(self) -> None:
+    def clean(self):
         self.NEWTAGS = []
         self.NEWATTRS = []
         self.HTMLDATA = []
@@ -48,13 +48,13 @@ def serialize_sets(obj):
                 l.append(dict((x,y) for x,y in item))
         return l
     
-def find_in_list(list: list, string: str) -> bool:
+def find_in_list(list, string):
     for i in list:
         if string.strip().endswith(i):
             return True
     return False
 
-def check_html_for_js(html: str) -> bool:
+def check_html_for_js(html):
     parser = htmlparser()
     buffer = open(html, "r").read()
     parser.feed(buffer)
