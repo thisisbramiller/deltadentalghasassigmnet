@@ -82,7 +82,7 @@ jobs:
         uses: github/codeql-action/autobuild@v3
 
       - name: Install Java
-        if: matrix.languages == 'java'
+        if: matrix.languages == 'java-kotlin'
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
@@ -90,7 +90,7 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace}}
 
-      - if: matrix.language == 'java'
+      - if: matrix.language == 'java-kotlin'
         name: Build project
         run: mvn package -f ${{matrix.languages}}/pom.xml
 

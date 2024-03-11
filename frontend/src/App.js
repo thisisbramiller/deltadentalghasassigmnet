@@ -15,7 +15,7 @@ function App() {
     const resp = await api.get("/all");
     setPolicyHolders(resp.data);
            
-  }
+  } 
  
   return (  
     <div className="App"> 
