@@ -19,7 +19,7 @@ import com.thisisbramiller.sorriso.repository.PolicyHolderRepository;
 
 
 @RestController
-@CrossOrigin(origins = "https://sorriso-frontend-staging-8afef3999af7.herokuapp.com")
+@CrossOrigin
 @RequestMapping("/api/v1/policyholder")
 public class PolicyHolderController {
 
