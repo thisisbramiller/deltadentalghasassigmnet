@@ -17,7 +17,10 @@ languages = {
     "typescript": [".ts", ".tsx", ".mts", ".cts"],
 }
 
-lines = list(open("./.github/scripts/diff.txt")).readlines()
+lines = []
+with open(".github/scripts/diff.txt") as f:
+    lines = [lines.rstrip() for line in f]
+print(lines)
 outlines = dict()
 outlines["include"] = set()
 
