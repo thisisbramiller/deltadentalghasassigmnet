@@ -90,4 +90,4 @@ for line in lines:
     if find_in_list(typescript, line) and (os.path.isdir(path)):
         outlines.append({"target-dir": path, "languages": "javascript-typescript"})
 
-print(str(json.dumps(outlines)))
+print(json.dumps(outlines, default=serialize_sets))
