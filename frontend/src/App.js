@@ -9,21 +9,22 @@ function App() {
 
   useEffect(() => {
     (async() => await load())();
-  }, []);
+  }, []); 
 
   async function load() {
     const resp = await api.get("/all");
     setPolicyHolders(resp.data);
-  }
-
-  return (
-    <div className="App">
+           
+  }   
+ 
+  return (  
+    <div className="App"> 
       <header className="App-header">
         <h1>Policy Holder Management</h1>
-      </header>
+      </header> 
       <PolicyHolderCrud load={load} policyHolders={policyHolders} />
     </div>
-  );
-}
-
+  );     
+}  
+      
 export default App;
