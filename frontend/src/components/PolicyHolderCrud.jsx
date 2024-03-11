@@ -27,4 +27,10 @@ const PolicyHolderCrud = ({ load, policyHolders }) => {
         load();
     }
     
+    async function editPolicyHolder(policyHolder) {
+        setId(policyHolder.id);
+        setName(policyHolder.name);
+        setEmail(policyHolder.email);
+        setPolicyNumber(policyHolder.policyNumber);
+    }
 }
