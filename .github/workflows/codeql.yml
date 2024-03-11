@@ -90,7 +90,7 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace}}
 
-      - if: matrix.language == 'java-kotlin'
+      - if: matrix.languages == 'java-kotlin'
         name: Build project
         run: mvn package -f ${{matrix.languages}}/pom.xml
 

@@ -18,7 +18,7 @@ import com.thisisbramiller.sorriso.model.PolicyHolder;
 import com.thisisbramiller.sorriso.repository.PolicyHolderRepository;
 
 
-@RestController   
+@RestController    
 @CrossOrigin 
 @RequestMapping("/api/v1/policyholder")
 public class PolicyHolderController {
