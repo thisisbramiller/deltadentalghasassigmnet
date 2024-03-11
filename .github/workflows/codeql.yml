@@ -71,7 +71,7 @@ jobs:
           ALL_PATHS: ${{ steps.get-all-paths.outputs.all-paths }}
           CHANGED_PATHS: ${{ steps.get-changed-paths.outputs.changed-paths }}
         run: |
-          echo "::set-output name=matrix::$ALL_PATHS$CHANGED_PATHS"
+          echo "{matrix}={$ALL_PATHS$CHANGED_PATHS}" >> $GITHUB_OUTPUT
           echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
 
   scan:
