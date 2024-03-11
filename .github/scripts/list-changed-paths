@@ -22,17 +22,36 @@ outlines = dict()
 outlines["include"] = set()
 
 class myhtmlparser(HTMLParser):
+    """
+    A custom HTML parser that extends the HTMLParser class.
+
+    This class provides methods to handle start tags, data, and clean up the parsed HTML.
+
+    Attributes:
+        NEWTAGS (list): A list to store the encountered start tags.
+        NEWATTRS (list): A list to store the attributes of the encountered start tags.
+        HTMLDATA (list): A list to store the encountered data within the HTML.
+
+    Methods:
+        handle_starttag(tag, attrs): Handles the start tag encountered during parsing.
+        handle_data(data): Handles the data encountered during parsing.
+        clean(): Resets the state of the parser by clearing the stored data.
+    """
+
     def __init__(self):
         super().__init__()
         self.reset()
         self.NEWTAGS = []
         self.NEWATTRS = []
         self.HTMLDATA = []
+
     def handle_starttag(self, tag, attrs):
         self.NEWTAGS.append(tag)
         self.NEWATTRS.append(attrs)
+
     def handle_data(self, data):
         self.HTMLDATA.append(data)
+
     def clean(self):
         self.NEWTAGS = []
         self.NEWATTRS = []

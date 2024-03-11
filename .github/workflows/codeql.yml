@@ -1,3 +1,22 @@
+# This GitHub Actions workflow file is used to run CodeQL analysis on a repository. It consists of two jobs: "find-paths-with-changes" and "scan".
+
+# The "find-paths-with-changes" job is responsible for finding the paths that have changed in the repository. It runs on the "ubuntu-latest" environment and has the following steps:
+# 1. Checkout repository: This step checks out the repository code.
+# 2. Get all paths: This step retrieves all the paths in the repository if the event is not a pull request.
+# 3. Get changed paths: This step retrieves the paths that have changed in the repository if the event is a pull request.
+# 4. Set matrix values: This step sets the matrix values for the "scan" job based on the retrieved paths.
+
+# The "scan" job is responsible for analyzing the repository with CodeQL. It runs on the "ubuntu-latest" environment and has the following steps:
+# 1. Checkout repository: This step checks out the repository code.
+# 2. Generate CodeQL config file: This step generates the CodeQL configuration file based on the target directory.
+# 3. Initialize CodeQL: This step initializes CodeQL with the specified configuration and languages.
+# 4. Attempting Autobuild: This step attempts to autobuild the code if the languages are "cpp" or "csharp".
+# 5. Install Java: This step installs Java if the language is "java-kotlin".
+# 6. Build project: This step builds the Java project if the language is "java-kotlin".
+# 7. Analyze with CodeQL: This step analyzes the repository with CodeQL using the specified matrix values.
+
+# The workflow is triggered on push events to the "main" branch and pull request events targeting the "main" branch. It ignores changes to the README.md file and any other files.
+
 name: CodeQL
 
 on:

@@ -18,6 +18,10 @@ import com.thisisbramiller.sorriso.model.PolicyHolder;
 import com.thisisbramiller.sorriso.repository.PolicyHolderRepository;
 
 
+/**
+ * This class represents the controller for managing policy holders.
+ * It handles HTTP requests related to policy holders such as creating, retrieving, updating, and deleting policy holders.
+ */
 @RestController     
 @CrossOrigin 
 @RequestMapping("/api/v1/policyholder")

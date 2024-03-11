@@ -1,3 +1,8 @@
+#  Configuration properties for the Spring Boot application.
+#   
+#  `spring.data.mongodb.database`: Specifies the name of the MongoDB database to connect to.
+#  `spring.data.mongodb.uri`: Specifies the URI for connecting to the MongoDB database. This URI includes the username, password, and other connection details.
+#  
 spring:
     data:
         mongodb:

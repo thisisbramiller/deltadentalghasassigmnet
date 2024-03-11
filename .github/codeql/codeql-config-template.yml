@@ -1,3 +1,6 @@
+# This YAML file is used to configure CodeQL analysis.
+# It specifies the name of the configuration and the paths to be analyzed.
+
 name: "CodeQL configuration"
 
 paths: 
