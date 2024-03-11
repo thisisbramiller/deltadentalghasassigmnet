@@ -33,4 +33,10 @@ const PolicyHolderCrud = ({ load, policyHolders }) => {
         setEmail(policyHolder.email);
         setPolicyNumber(policyHolder.policyNumber);
     }
+
+    async function deletePolicyHolder(id) {
+        await api.delete(`/delete/${id}`);
+        alert("Policy Holder deleted successfully!");
+        load();
+    }
 }
