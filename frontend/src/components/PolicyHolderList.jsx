@@ -14,7 +14,7 @@ const PolicyHolderList = ({ policyHolders, editPolicyHolder, deletePolicyHolder 
                     </tr>
                 </thead>
                 <tbody>
-                    {policyHolders.map(policyHolder, index => (
+                    {policyHolders.map((policyHolder, index) => (
                         <tr key={policyHolder.id}>
                             <td>{policyHolder.name}</td>
                             <td>{policyHolder.email}</td>
