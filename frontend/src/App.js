@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     (async() => await load())();
-  }, []);
+  }, []); 
 
   async function load() {
     const resp = await api.get("/all");
@@ -24,7 +24,7 @@ function App() {
       </header>
       <PolicyHolderCrud load={load} policyHolders={policyHolders} />
     </div>
-  );
+  ); 
 }
       
 export default App;
