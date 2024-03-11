@@ -13,6 +13,18 @@ on:
       - '*'
 
 jobs:
+  - find-paths-with-changes:
+      name: Find paths with changes
+      runs-on: ubuntu-latest
+      outputs:
+        matrix: ${{ steps.set-matrix-values.outputs.matrix }}
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+
   scan:
     name: Analyze code with CodeQL
     runs-on: ubuntu-latest
