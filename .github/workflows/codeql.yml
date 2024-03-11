@@ -70,24 +70,16 @@ jobs:
         run: |
           cp .github/codeql-config-template.yml codeql-config.yml
           sed -i 's|TARGET_DIR|'${TARGET_DIR}'|g' codeql-config.yml
-          
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
+          config-file: codeql-config.yml
           languages: ${{ matrix.languages }}
 
-      - if: matrix.language == 'java-kotlin'
-        name: Setup JDK 17
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '17'
-          server-id: github
-          settings-path: ${{ github.workspace }}
-
-      - if: matrix.language == 'java-kotlin'
-        name: Build project
-        run: mvn package -f ./backend/pom.xml
+      - name: Attempting build
+        if: ${{ (matrix.languages == 'cpp' || matrix.languages == 'csharp' || matrix.languages == 'java') }}
+        uses: github/codeql-action/autobuild@v3
 
       - name: Analyze with CodeQL
         uses: github/codeql-action/analyze@v3
