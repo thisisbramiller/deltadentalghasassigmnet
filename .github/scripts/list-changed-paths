@@ -89,4 +89,3 @@ for line in lines:
         outlines["include"].add(tuple(dict({"target-dir": path, "languages": "typescript"}).items()))
 
 print(json.dumps(outlines, default=serialize_sets))
-print(
