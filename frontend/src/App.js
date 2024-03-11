@@ -24,7 +24,7 @@ function App() {
       </header>
       <PolicyHolderCrud load={load} policyHolders={policyHolders} />
     </div>
-  );  
+  );   
 }
       
 export default App;
