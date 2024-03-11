@@ -51,13 +51,13 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
 
       - name: Get all paths
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name != 'pull_request' }}
         id: get-all-paths
         run: |
           echo "::set-output name=all-paths::$(./.github/scripts/list-all-paths)"
 
       - name: Get changed paths
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' }}
         id: get-changed-paths
         run: |
             git diff-tree --no-commit-id --name-only -r ${{ github.baseref }} ${{ github.sha }} > ./.github/scripts/diff.txt
