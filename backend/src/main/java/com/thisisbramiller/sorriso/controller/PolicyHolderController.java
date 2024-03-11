@@ -26,9 +26,11 @@ public class PolicyHolderController {
     @Autowired
     private PolicyHolderRepository policyHolderRepository;
 
+    
     @PostMapping("/create")
     public PolicyHolder create(@RequestBody PolicyHolder policyHolder) {
         return policyHolderRepository.save(policyHolder);
+        
     }
 
     @GetMapping("/all")

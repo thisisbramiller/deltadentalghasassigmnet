@@ -17,7 +17,7 @@ jobs:
     name: Find paths with changes
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix-values.outputs.matrix }}
+      matrix: ${{ steps.set-matrix-values.outputs.matrix }} 
 
     steps:
       - name: Checkout repository
@@ -59,8 +59,10 @@ jobs:
       - name: Get changed paths
         if: ${{ github.event_name == 'pull_request' }}
         id: get-changed-paths
+        env: 
+          PYTHONUNBUFFERED: "1"
         run: |
-            git diff-tree --no-commit-id --name-only -r ${{ github.event_before }} ${{ github.after }} > ./.github/scripts/diff.txt
+            git diff --name-only ${{ github.event.before }} ${{ github.event.after }} > ./.github/scripts/diff.txt
             echo "::set-output name=changed-paths::$(./.github/scripts/list-changed-paths)"
 
       - name: Set matrix values
@@ -73,7 +75,8 @@ jobs:
           echo "::notice::Matrix values set to $ALL_PATHS$CHANGED_PATHS"
 
   scan:
-    name: Analyze code with CodeQL
+    name: "Analyze ${{matrix.languages}} with CodeQL: ${{matrix.target-dir}}"
+    needs: find-paths-with-changes
     runs-on: ubuntu-latest
     timeout-minutes: 360
     permissions:
