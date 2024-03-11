@@ -3,5 +3,3 @@ spring:
         mongodb:
             database: test
             uri: mongodb+srv://thisisbramiller:$$YqodQR7FjhCymL@cluster0.yweyezb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-server:
-    port: $PORT
